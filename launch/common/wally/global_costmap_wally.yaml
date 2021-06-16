@@ -1,0 +1,10 @@
+global_costmap:
+  global_frame: wally
+  robot_base_frame: base_link
+  update_frequency: 2.0 #5.0
+  publish_frequency: 2.0
+  static_map: false
+  rolling_window: true
+  width: 40.0 #20.0
+  height: 20.0 #20.0
+  resolution: 0.1

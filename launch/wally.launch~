@@ -1,0 +1,31 @@
+<launch>
+	
+	<node pkg="wally" type="wally" name="wally" output="screen" respawn="true">		
+ 		<param name="publish_tf" value="wally" />
+		<remap from="/in/scan1" to="/base_scan"/>
+<!--		<remap from="/in/scan2" to="/laser_back/scan"/>-->
+		<remap from="/in/odom" to="/odosm"/>
+		<param name="period" value="500" />	
+                <param name="length_min" value="1.0" />
+		<param name="hallway_width" value="7"/>
+		<param name="prefer" value="none"/>
+		<param name="robot_width" value="0.5"/> 
+		<param name="laser_front_frame" value="base_laser_link"/> 
+<!--		<param name="laser_rear_frame" value="laser_rear_down"/> -->
+		<param name="points_min_percent" value="5"/> 
+		<param name="zero_is" value="center" />
+		<param name="use_odom" value="false" />
+		<param name="palante" value="false" />
+		
+	</node>
+
+	<node pkg="move_base" type="move_base" name="navigation" output="screen">
+	    	<rosparam file="$(find lora_launch)/launch/common/costmaps.yaml" command="load"/>
+		<rosparam file="$(find lora_launch)/launch/common/move_base.yaml" command="load"/>
+	        <rosparam file="$(find lora_launch)/launch/common/planners/global_planner_params.yaml" command="load" />
+  	</node>
+
+
+        <remap from="/scan" to="/base_scan"/>
+
+</launch>
